@@ -2,15 +2,18 @@ import json
 import csv
 
 class ParseJson():
-    def __init__(self, file):
-        self.file = file
+    def __init__(self, data):
+        #self.file = file
         #self.__dict__ = json.loads(data)
-        self. fileType = None
-        self.data = file.read()
+        #self. fileType = None
+        self.data = data
         self.json_object = None
-        self.isJson()
+        #self.is_json()
 
-    def isJson(self):
+    def dict_to_json(self):
+        self.json_object= json.dumps(self.data)
+
+    def string_to_json(self):
         try:
             #print(self.data)
             self.json_object = json.loads(self.data)
@@ -23,7 +26,11 @@ class ParseJson():
             self.fileType = "json"
 
     def print_json(self):
-        print(self.json_object)
+        print("json object:{}".format(self.json_object))
+
+    def sort_json(self):
+        self.json_object = json.dumps(self.json_object, indent=4, sort_keys=True)
+
 
 
 
