@@ -2,6 +2,7 @@ import jsonparser as parser
 from jsoncompare import CompareJson
 import requests
 import html
+import json
 
 
 def readFromAPI(endpoint,survived, age, pclass,  timezone, rows, records ):
@@ -26,18 +27,28 @@ def main(format, file_path, delimiter=None):
     formats = ["json", "csv"]
     assert (format in f for f in formats)
     file = open(file_path, "r")
-    parse = parser.ParseJson(file)
+    data = file.read()
+    parse = parser.ParseJson(data)
+
+    parse.string_to_json()
+    #parse.sort_json()
+    #parse.print_json()
     json1 = parse.json_object
 
-    #isjson = parsejson.isJson()
-    #parsejson.print_json()
     endpoint = "https://public.opendatasoft.com/api "
     json2 = readFromAPI(endpoint, "Yes", 23, 2, 'Europe/Berlin', 1, 1.0)
-    
+    #print(type(json2))
+    parse2 = parser.ParseJson(json2)
+
+    parse2.dict_to_json()
+    json2 = parse2.json_object
+    #print("dict object={}".format(type(parse2.json_object)))
+
     compare = CompareJson(json1, json2)
-    compare.print_json1()
-    #result = compare(json1, json2)
-    #print(result)
+
+    result = compare.compare_one_to_one()
+    print(result)
+
 
 
 main("json", "files/file2.json")
