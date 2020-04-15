@@ -12,6 +12,7 @@ class ParseJson():
 
     def dict_to_json(self):
         self.json_object= json.dumps(self.data)
+        self.json_object = json.loads(self.json_object)
 
     def string_to_json(self):
         try:
