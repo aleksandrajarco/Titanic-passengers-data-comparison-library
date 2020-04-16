@@ -31,8 +31,6 @@ def main(format, file_path, delimiter=None):
     parse = parser.ParseJson(data)
 
     parse.string_to_json()
-    #parse.sort_json()
-    #parse.print_json()
     json1 = parse.json_object
 
     endpoint = "https://public.opendatasoft.com/api "
@@ -44,10 +42,11 @@ def main(format, file_path, delimiter=None):
     json2 = parse2.json_object
     #print("dict object={}".format(type(parse2.json_object)))
 
-    compare = CompareJson(json1, json2)
+    compare = CompareJson()
 
-    result = compare.compare_one_to_one()
+    result = compare.compare_one_to_one(json1, json2)
     print(result)
+
 
 
 
