@@ -12,6 +12,8 @@ argparser.add_argument('--out', type = str, action= 'store', help='path to the d
 argparser.add_argument('--compare', action="store_true", default=False)
 argparser.add_argument('--diff', action="store_true", default=False)
 argparser.add_argument('--params', action="store", default = "parameters/params1")
+argparser.add_argument('--localjson', action="store", default = "files/file1.json")
+
 
 def read_params_from_file(path):
     params = open(path,"r")
@@ -42,10 +44,11 @@ def escape_html(text):
 
 
 
-def main( file_path):
+def main( ):
     args = argparser.parse_args()
     out = args.out
     param =args.params
+    localjson = args.localjson
     # print(parser.parse_args(['-out']))
 
     if (args.compare == True or args.diff == True) :
@@ -53,7 +56,7 @@ def main( file_path):
 
         params_dict = read_params_from_file(param)
 
-        file = open(file_path, "r")
+        file = open(localjson, "r")
         data = file.read()
         parse = parser.ParseJson(data)
 
@@ -91,4 +94,4 @@ def main( file_path):
 
 
 #params_dict = read_params_from_file("parameters/params1")
-main("files/file2.json")
+main()
