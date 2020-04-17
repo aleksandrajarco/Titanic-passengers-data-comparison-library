@@ -22,4 +22,4 @@ python main.py  --params parameters/params1  --compare --localjson files/file1.j
 python main.py  --params parameters/params1  --compare --localjson files/file2.json
 
 #return diff of local json and API search to file:
-python main.py --diff --out out/mydiff.json
+python main.py --diff --out out/mydiff.json --localjson files/file2.json
