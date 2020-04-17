@@ -1,6 +1,10 @@
+import jsondiff
+import json
+
 class CompareJson():
     def __init__(self):
         pass
+
 
     def compare_one_to_one(self, json1, json2):
 
@@ -23,3 +27,11 @@ class CompareJson():
 
             return True
 
+    def print_json_diff_to_file(self, path, json1, json2):
+
+        f=open(path, "w")
+        res = jsondiff.diff(json1, json2)
+
+        #res=json.dumps(res, indent=4, sort_keys=True)
+        f.write(str(res))
+        f.close()
